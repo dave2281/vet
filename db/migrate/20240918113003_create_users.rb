@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration[7.1]
       t.string :surname
       t.string :patronymic
       t.text :description
-      t.string :email
+      t.text :experience
       t.string :role
 
       t.timestamps

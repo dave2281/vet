@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.0.2"
+ruby "3.3.5"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.4"
@@ -68,3 +68,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+# custom gems
+gem 'ostruct'
+gem "pundit", "~> 2.4"
+gem "devise", "~> 4.9"
