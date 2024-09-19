@@ -5,7 +5,7 @@
 
       <ul>
         <% comment.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+          <li class="alert-danger"><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
