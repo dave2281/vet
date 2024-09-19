@@ -7,6 +7,7 @@ class QuestionsController < ApplicationController
 
   def show
     @comments = Comment.all
+    @users = User.all
   end
 
   def new

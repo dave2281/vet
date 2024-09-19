@@ -7,12 +7,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    authorize @user
   end
 
   def new
     @user = User.new
-    authorize @user
   end
 
   def edit

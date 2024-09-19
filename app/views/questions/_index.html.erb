@@ -1,9 +1,12 @@
-<div id="questions">
-  <% @questions.each do |question| %>
-    <%= question.title %>
-    <p>
-      <%= link_to "Show this question", question %>
-    </p>
-  <% end %>
-</div>
+<% @questions.each do |question| %>
+    <div class="card mx-3 mb-3">
+      <div class="card-body">
+        <%= question.title %>
+        <p>
+          <%= link_to "Show this question", question, class: 'btn btn-success' %>
+        </p>
+      </div>
+    </div>
+<% end %>
+
 
