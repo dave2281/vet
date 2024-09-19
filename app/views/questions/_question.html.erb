@@ -1,2 +1,7 @@
-<div id="<%= dom_id question %>">
+<div>
+  <p><%= question.title %></p>
+  <p><%= question.text %></p>
+  <p><%= question.user_id %></p>
 </div>
+
+<%= render "comments/comment", comment: @comments %>

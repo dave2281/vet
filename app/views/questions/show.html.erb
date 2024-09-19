@@ -1,10 +1,27 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @question %>
+<%= @question.title %>
+<%= @question.text %>
+<%= @question.user_id %>
+<br>
+<br>
+<br>
+<% @comments.each do |comment| %>
+  <% if comment && comment.question_id == @question.id %>
+    <div class="border-3">
+      <p><%= comment.text %></p>
+      <p>User id:<%= comment.user_id %></p>
+      <p>Question id: <%= comment.question_id %></p>
+      <p><%= comment.created_at %></p>
+      <%= link_to "Edit this question", edit_comment_path(comment) %> |
+      <%= button_to "Destroy this comment", @question, method: :delete %>
+    </div>
+  <% end %>
+<% end %>
 
 <div>
   <%= link_to "Edit this question", edit_question_path(@question) %> |
-  <%= link_to "Back to questions", questions_path %>
+  <%= link_to "Back to questions", root_path %>
 
   <%= button_to "Destroy this question", @question, method: :delete %>
 </div>

@@ -1,27 +1,27 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :set_user, only: %i[show edit update destroy]
 
-  # GET /users or /users.json
   def index
+    authorize User
     @users = User.all
   end
 
-  # GET /users/1 or /users/1.json
   def show
+    authorize @user
   end
 
-  # GET /users/new
   def new
     @user = User.new
+    authorize @user
   end
 
-  # GET /users/1/edit
   def edit
+    authorize @user
   end
 
-  # POST /users or /users.json
   def create
     @user = User.new(user_params)
+    authorize @user
 
     respond_to do |format|
       if @user.save
@@ -34,8 +34,9 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/1 or /users/1.json
   def update
+    authorize @user
+
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: "User was successfully updated." }
@@ -47,8 +48,8 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1 or /users/1.json
   def destroy
+    authorize @user
     @user.destroy!
 
     respond_to do |format|
@@ -58,13 +59,12 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def user_params
-      params.require(:user).permit(:name, :surname, :patronymic, :description, :email, :role)
-    end
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def user_params
+    params.require(:user).permit(:name, :surname, :patronymic, :description, :email, :role)
+  end
 end
