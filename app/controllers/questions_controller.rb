@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_question, only: %i[ show edit update destroy ]
 
   def index
@@ -6,8 +7,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @comments = Comment.all
-    @users = User.all
+    @comment = @question.comments.new
   end
 
   def new
@@ -22,7 +22,7 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to @question, notice: "Question was successfully created." }
+        format.html { redirect_to question_url(@question), notice: "Question was successfully created." }
         format.json { render :show, status: :created, location: @question }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -55,7 +55,9 @@ class QuestionsController < ApplicationController
   private
     def set_question
       @question = Question.find(params[:id])
-      @comments = Comment.all
+      @comments = @question.comments
+      @user = User.find(@question.user_id)
+      @users = User.all
     end
 
     def question_params

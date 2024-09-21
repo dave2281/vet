@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :comments
-  resources :questions
+  resources :questions do
+    resources :comments
+  end
   resources :users
 
   devise_scope :user do
@@ -12,8 +13,6 @@ Rails.application.routes.draw do
     unauthenticated do
       root to: 'devise/sessions#new', as: :unauthenticated_root
     end
-
-    get 'users/sign_out' => "devise/sessions#destroy"
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
