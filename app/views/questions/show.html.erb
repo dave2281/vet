@@ -39,16 +39,18 @@
             </div>
             <p class="font-monospace"><%= comment.created_at.strftime("%H:%M %d-%m-%Y") %></p>
           </div>
-          <div class="container-md">
-            <div class="row">
-              <div class="col text-md-start">
-                <%= button_to "Edit", edit_comment_path(comment), class: 'btn btn-success'%>
-              </div>
-              <div class="col text-md-end">
-                <%= button_to "Destroy", @question, method: :delete, class: 'btn btn-danger' %>
+          <% if comment.user_id == current_user.id%>
+            <div class="container-md">
+              <div class="row">
+                <div class="col text-md-start">
+                  <%= button_to "Edit", edit_comment_path(comment), class: 'btn btn-success'%>
+                </div>
+                <div class="col text-md-end">
+                  <%= button_to "Destroy", @question, method: :delete, class: 'btn btn-danger' %>
+                </div>
               </div>
             </div>
-          </div>
+          <% end %>
         </div>
       </div>
     <% end %>
