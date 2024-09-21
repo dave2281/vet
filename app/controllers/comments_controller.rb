@@ -1,10 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_question
   before_action :authenticate_user!
-  before_action :set_comment, only: %i[ show edit update destroy ]
-
-  def show
-  end
+  before_action :set_comment, only: %i[edit update destroy show]
 
   def new
     @comment = Comment.new
@@ -42,10 +39,11 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    @comment = Comment.find(params[:id])
     @comment.destroy!
 
     respond_to do |format|
-      format.html { redirect_to authenticated_root_path, status: :see_other, notice: "Comment was successfully destroyed." }
+      format.html { redirect_to @question, status: :see_other, notice: "Comment was successfully destroyed." }
       format.json { head :no_content }
     end
   end

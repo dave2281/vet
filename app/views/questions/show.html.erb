@@ -47,9 +47,8 @@
           <% if comment.user_id == current_user.id || current_user.admin?%>
             <div class="container-md">
               <div class="row">
-                <div class="col text-md-start"></div>
                 <div class="col text-md-end">
-                  <%= button_to "Destroy", @question, method: :delete, class: 'btn btn-danger' %>
+                  <td><%= link_to "Destroy", question_comment_url(@question, comment), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>
                 </div>
               </div>
             </div>

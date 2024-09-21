@@ -2,12 +2,14 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_question, only: %i[ show edit update destroy ]
 
+
   def index
     @questions = Question.all
   end
 
   def show
     @comment = @question.comments.new
+    @comments = @question.comments
   end
 
   def new
@@ -18,7 +20,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new(question_params)
+    @question = current_user.questions.build(question_params)
 
     respond_to do |format|
       if @question.save
@@ -47,7 +49,7 @@ class QuestionsController < ApplicationController
     @question.destroy!
 
     respond_to do |format|
-      format.html { redirect_to questions_path, status: :see_other, notice: "Question was successfully destroyed." }
+      format.html { redirect_to authenticated_root_path, status: :see_other, notice: "Question was successfully destroyed." }
       format.json { head :no_content }
     end
   end
