@@ -1,12 +1,19 @@
 <% @questions.each do |question| %>
     <div class="card mx-3 mb-3">
-      <div class="card-body">
-        <%= question.title %>
-        <p>
-          <%= link_to "Show this question", question, class: 'btn btn-success' %>
-        </p>
+      <div style="transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='rgba(0, 123, 255, 0.1)'" onmouseout="this.style.backgroundColor='transparent'">
+
+        <div class="card-body">
+          <div class="fs"></div>
+
+            <%= link_to "#{question.title}", question, class: 'text-decoration-none fs-4' %>
+          <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" class="text-truncate">
+            <%= question.text %>
+          </div>
+        </div>
       </div>
     </div>
+
+
 <% end %>
 
 

@@ -14,12 +14,12 @@
   <div>
     <% form.hidden_field :user_id %>
 
-    <div class="field">
-      <%= form.label :title %>
-      <%= form.text_area :title %>
+    <div class="mb-3">
+      <%= form.label :title, class: 'form-label' %>
+      <%= form.text_area :title, class: '' %>
     </div>
 
-    <div class="field">
+    <div class="mb-3">
       <%= form.label :text %>
       <%= form.text_area :text %>
     </div>

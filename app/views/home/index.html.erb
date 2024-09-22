@@ -1,4 +1,2 @@
 <%= render "questions/index" %>
-<%= button_to 'Sign out', destroy_user_session_path, method: :delete %>
-<%= link_to 'Profile', user_path(current_user) %>
-<%= button_to 'New question', new_question_path, class: 'btn btn-primary' %>
+<%= link_to 'New question', new_question_url, class: 'btn btn-primary' %>
