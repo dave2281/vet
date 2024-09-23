@@ -15,10 +15,10 @@
         <% if current_user.id == @question.user_id || current_user.admin? %>
           <div class="row">
             <div class="col text-md-start">
-              <%= button_to "Edit", edit_question_path(@question), class: 'col btn btn-success' %>
+              <%= button_to "Edit", edit_category_question_url(@question), class: 'col btn btn-success' %>
             </div>
             <div class="col text-md-end">
-              <%= button_to "Delete", @question, method: :delete, class: 'col btn btn-danger'%>
+              <%= button_to "Delete", category_question_path(@question), method: :delete, class: 'col btn btn-danger'%>
             </div>
           </div>
         <% end %>
@@ -48,7 +48,7 @@
             <div class="container-md">
               <div class="row">
                 <div class="col text-md-end">
-                  <td><%= link_to "Destroy", question_comment_url(@question, comment), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>
+                  <td><%= link_to "Destroy", category_question_comment_url(@question, comment), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>
                 </div>
               </div>
             </div>

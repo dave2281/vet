@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  resources :categories
   devise_for :users
-  resources :questions do
-    resources :comments
+  resources :categories do
+    resources :questions do
+      resources :comments
+    end
   end
   resources :users
 

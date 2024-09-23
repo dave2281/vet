@@ -13,18 +13,24 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = Question.new
+    @category = Category.find(params[:category_id])
+    @question = @category.questions.build
   end
 
   def edit
+    @category = Category.find(params[:category_id])
+    @question = @category.questions.find(params[:id])
   end
 
   def create
-    @question = current_user.questions.build(question_params)
+    @category = Category.find(params[:category_id])  # Найти категорию
+    @question = @category.questions.build(question_params)  # Создание нового вопроса
+
+    @question.user = current_user  # Установка текущего пользователя
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to question_url(@question), notice: "Question was successfully created." }
+        format.html { redirect_to category_questions_url(@question), notice: "Question was successfully created." }
         format.json { render :show, status: :created, location: @question }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -49,7 +55,7 @@ class QuestionsController < ApplicationController
     @question.destroy!
 
     respond_to do |format|
-      format.html { redirect_to authenticated_root_path, status: :see_other, notice: "Question was successfully destroyed." }
+      format.html { redirect_to category_path(Category.find(params[:category_id])), status: :see_other, notice: "Question was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -63,6 +69,6 @@ class QuestionsController < ApplicationController
     end
 
     def question_params
-      params.require(:question).permit(:title, :text, :user_id)
+      params.require(:question).permit(:title, :text, :category_id)
     end
 end

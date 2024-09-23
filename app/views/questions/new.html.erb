@@ -1,9 +1,12 @@
 <h1>New question</h1>
 <%= current_user.inspect %>
-<%= render "form", question: @question %>
+<br>
+
+<%= render "form", question: @question, category: @category %>
 
 <br>
 
 <div>
-  <%= link_to "Back to questions", questions_path %>
+  <%= link_to "Back to main page", unauthenticated_root_path %>
+  <%= link_to "Back to previous category", category_path(@category) %>
 </div>

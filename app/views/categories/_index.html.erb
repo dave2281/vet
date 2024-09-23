@@ -1,0 +1,30 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Categories</h1>
+
+<% @categories.each do |category| %>
+  <div class="card my-3">
+    <div class="card-body">
+      <div class="container">
+        <div class="row">
+          <%= link_to "#{category.title}", category_path(category), class: 'col my-1 mb-3 fs-4 text-decoration-none' %>
+          <% user = @users.find_by(id: category.user_id) %>
+          <%= link_to "#{user.name + ' ' + user.surname}", user_path(category.user_id), class: 'col text-end' %>
+        </div>
+        <p class="font-monospace"><%= category.created_at.strftime("%H:%M %d-%m-%Y") %></p>
+      </div>
+
+      <% if category.user_id == current_user.id || current_user.admin? %>
+        <div class="container-md">
+          <div class="row">
+            <div class="col text-md-end">
+              <%= link_to "Delete", category_path(category), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to "New category", new_category_path %>

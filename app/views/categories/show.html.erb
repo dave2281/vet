@@ -1,0 +1,48 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @category %>
+<div class="container">
+  <div class="row">
+    <div class="col text-start my-3 ms-1">
+      <%= link_to 'New question', new_category_question_path(@category), class: 'btn btn-primary' %>
+    </div>
+    <div class="col text-center my-3 ms-1 fs-4 fw-bolder">
+      <%= @category.title %>
+    </div>
+    <div class="col text-end fs-4 my-3 ms-1">
+      Questions quantity: <%= @questions.all.count %>
+    </div>
+  </div>
+</div>
+
+<% @questions.each do |question| %>
+  <div class="card my-3">
+    <div class="card-body">
+      <div class="container">
+        <div class="row">
+          <%= link_to "#{question.title}", category_question_path(question), class: 'col my-1 mb-3 text-decoration-none' %>
+          <% user = @users.find_by(id: question.user_id) %>
+          <%= link_to "#{user.name + ' ' + user.surname}", user_path(question.user_id), class: 'col text-end' %>
+        </div>
+        <p class="font-monospace"><%= question.created_at.strftime("%H:%M %d-%m-%Y") %></p>
+      </div>
+
+      <% if question.user_id == current_user.id || current_user.admin? %>
+        <div class="container-md">
+          <div class="row">
+            <div class="col text-md-end">
+              <%= link_to "Destroy", category_question_path(@category, question), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<div>
+  <%= link_to "Edit this category", edit_category_path(@category) %> |
+  <%= link_to "Back to main page", unauthenticated_root_path %>
+
+  <%= button_to "Destroy this category", @category, method: :delete %>
+</div>
