@@ -18,8 +18,7 @@
               <%= button_to "Edit", edit_category_question_url(@question), class: 'col btn btn-success' %>
             </div>
             <div class="col text-md-end">
-              <%= button_to "Delete", category_question_path(@question), method: :delete, class: 'col btn btn-danger'%>
-            </div>
+              <%= link_to "Destroy", category_question_path(@category, @question), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></div>
           </div>
         <% end %>
       </div>
@@ -29,6 +28,7 @@
   <div class="my-5">
     <h2 class="fs-2 fw-bold"><%= pluralize(@question.comments.size-1, 'comment') %></h2>
   </div>
+
   <% @comments.each do |comment| %>
     <% if comment.id != nil && comment.question_id == @question.id %>
       <div class="card my-3">

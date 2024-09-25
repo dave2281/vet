@@ -4,12 +4,12 @@ class QuestionsController < ApplicationController
 
 
   def index
-    @questions = Question.all
+    @questions = Question.order(created_at: :desc)
   end
 
   def show
     @comment = @question.comments.new
-    @comments = @question.comments
+    @comments = @question.comments.order(created_at: :desc)
   end
 
   def new
@@ -18,14 +18,12 @@ class QuestionsController < ApplicationController
   end
 
   def edit
-    @category = Category.find(params[:category_id])
     @question = @category.questions.find(params[:id])
   end
 
   def create
-    @category = Category.find(params[:category_id])  # Найти категорию
-    @question = @category.questions.build(question_params)  # Создание нового вопроса
-
+    @category = Category.find(params[:category_id])
+    @question = @category.questions.build(question_params)
     @question.user = current_user
 
     respond_to do |format|
@@ -63,7 +61,7 @@ class QuestionsController < ApplicationController
   private
     def set_question
       @question = Question.find(params[:id])
-      @comments = @question.comments
+      @comments = @question.comments.order(created_at: :desc)
       @category = Category.find(params[:category_id])
       @user = User.find(@question.user_id)
       @users = User.all

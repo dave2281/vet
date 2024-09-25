@@ -74,3 +74,4 @@ end
 gem 'ostruct'
 gem "pundit", "~> 2.4"
 gem "devise", "~> 4.9"
+gem 'pagy', '~> 9.0'

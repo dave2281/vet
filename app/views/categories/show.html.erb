@@ -15,12 +15,26 @@
   </div>
 </div>
 
+<%= raw pagy_bootstrap_nav(@pagy) %>
+
+<style>
+    .highlight {
+        background-color: #f0f8ff; /* Цвет подсветки */
+        transition: background-color 0.3s; /* Плавный переход цвета */
+    }
+</style>
+
 <% @questions.each do |question| %>
-  <div class="card my-3">
+  <div class="card my-3" style="padding: 20px; margin: 10px; border: 1px solid #ccc;"
+       onmouseover="this.classList.add('highlight')"
+       onmouseout="this.classList.remove('highlight')">
     <div class="card-body">
       <div class="container">
         <div class="row">
-          <%= link_to "#{question.title}", category_question_path(@category, question), class: 'col my-1 mb-3 text-decoration-none' %>
+          <%= link_to "#{question.title}", category_question_path(@category, question), class: 'col my-1 mb-3 text-decoration-none fs-5' %>
+          <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" class="text-truncate">
+            <%= question.text %>
+          </div>
           <% user = @users.find_by(id: question.user_id) %>
           <%= link_to "#{user.name + ' ' + user.surname}", user_path(question.user_id), class: 'col text-end' %>
         </div>

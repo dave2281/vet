@@ -2,11 +2,11 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: %i[ show edit update destroy ]
 
   def index
-    @categories = Category.all
+    @categories = Category.order(created_at: :asc)
   end
 
   def show
-    @questions = Question.where(category_id: params[:id])
+    @pagy, @questions = pagy(Question.where(category_id: params[:id]).order(created_at: :desc), limit:3)
     @users = User.all
   end
 
@@ -47,7 +47,7 @@ class CategoriesController < ApplicationController
     @category.destroy!
 
     respond_to do |format|
-      format.html { redirect_to categories_path, status: :see_other, notice: "Category was successfully destroyed." }
+      format.html { redirect_to unauthenticated_root_path, status: :see_other, notice: "Category was successfully destroyed." }
       format.json { head :no_content }
     end
   end

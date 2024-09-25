@@ -167,6 +167,7 @@ GEM
       racc (~> 1.4)
     orm_adapter (0.5.0)
     ostruct (0.6.0)
+    pagy (9.0.9)
     parallel (1.24.0)
     parser (3.3.0.5)
       ast (~> 2.4.1)
@@ -300,6 +301,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   ostruct
+  pagy (~> 9.0)
   pg (~> 1.1)
   puma (>= 5.0)
   pundit (~> 2.4)
