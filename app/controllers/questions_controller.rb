@@ -26,11 +26,11 @@ class QuestionsController < ApplicationController
     @category = Category.find(params[:category_id])  # Найти категорию
     @question = @category.questions.build(question_params)  # Создание нового вопроса
 
-    @question.user = current_user  # Установка текущего пользователя
+    @question.user = current_user
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to category_questions_url(@question), notice: "Question was successfully created." }
+        format.html { redirect_to category_path(@category), notice: "Question was successfully created." }
         format.json { render :show, status: :created, location: @question }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -64,6 +64,7 @@ class QuestionsController < ApplicationController
     def set_question
       @question = Question.find(params[:id])
       @comments = @question.comments
+      @category = Category.find(params[:category_id])
       @user = User.find(@question.user_id)
       @users = User.all
     end

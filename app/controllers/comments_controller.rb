@@ -5,6 +5,8 @@ class CommentsController < ApplicationController
 
   def new
     @comment = Comment.new
+    @category = Category.find(Question.find(params[:question_id]).category_id)
+
   end
 
   def edit
@@ -16,10 +18,10 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to question_url(@question), notice: "Comment was successfully created." }
+        format.html { redirect_to category_question_path(@question), notice: "Comment was successfully created." }
         format.json { render :show, status: :created, location: @comment }
       else
-        format.html { redirect_to question_url(@question), alert: "Error creating comment." }
+        format.html { redirect_to category_question_path(@question), alert: "Error creating comment." }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
