@@ -18,4 +18,8 @@ class User < ApplicationRecord
   def doctor?
     role == 'doctor'
   end
+
+  def name
+    User.name
+  end
 end
