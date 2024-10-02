@@ -7,6 +7,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  validates :name, :surname, :email, presence: true
+  validates :experience, :description, presence: true, if: :doctor?
+
   def admin?
     role == 'admin'
   end
