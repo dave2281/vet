@@ -59,7 +59,7 @@ RSpec.describe CategoriesController, type: :controller do
     end
 
     let(:invalid_attributes) do
-      { title: '', description: 'Category description' }
+      { description: 'Category description' }
     end
 
     context 'with valid parameters' do
@@ -86,6 +86,16 @@ RSpec.describe CategoriesController, type: :controller do
         expect do
           post :create, params: { category: invalid_attributes }
         end.to change(Category, :count).by(0)
+      end
+
+      it 'does not redirect to the new category' do
+        post :create, params: { category: invalid_attributes }
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+
+      it 'does not return a successful response in JSON format' do
+        post :create, params: { category: invalid_attributes, format: :json }
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
