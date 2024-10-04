@@ -14,7 +14,7 @@ RSpec.describe CategoriesController, type: :controller do
     Category.create(
       title: 'hello',
       description: 'category description',
-      user:
+      user: user
     )
   end
 
@@ -34,7 +34,8 @@ RSpec.describe CategoriesController, type: :controller do
 
   describe 'GET #new' do
     it 'returns a success response' do
-      get :new, params: { title: 'Category title', description: 'Category description', user_id: user.id }
+      get :new
+      expect(response).to be_successful
     end
   end
 
@@ -96,6 +97,34 @@ RSpec.describe CategoriesController, type: :controller do
       it 'does not return a successful response in JSON format' do
         post :create, params: { category: invalid_attributes, format: :json }
         expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    let!(:category) do
+      Category.create(
+        title: 'Category title',
+        description: 'Category description',
+        user: user
+      )
+    end
+
+    context 'deletes object from database' do
+      it 'counts remote objects' do
+        expect do
+          delete :destroy, params: { id: category.id }
+        end.to change(Category, :count).by(-1)
+      end
+
+      it 'response' do
+        delete :destroy, params: { id: category.id }
+        expect(flash[:notice]).to eq('Category was successfully destroyed.')
+      end
+
+      it 'redirects to unauthenticated_root_path' do
+        delete :destroy, params: { id: category.id }
+        expect(response).to redirect_to(unauthenticated_root_path)
       end
     end
   end
