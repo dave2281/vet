@@ -7,5 +7,6 @@ FactoryBot.define do
     sequence(:experience) { |n| "Experience#{n}" }
     sequence(:email) { |n| "Email#{n}@example.com" }
     sequence(:password) { |n| "Password#{n}" }
+    role { 'admin' }
   end
 end
