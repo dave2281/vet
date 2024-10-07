@@ -4,8 +4,8 @@
         <div class="row">
           <div class="col-12">
             <div class="mb-5">
-              <h2 class="display-5 fw-bold text-center">Sign in</h2>
-              <p class="text-center m-0">Don't have an account? <%= link_to 'Sign up', new_registration_path(resource_name) %></p>
+              <h2 class="display-5 fw-bold text-center">sign in</h2>
+              <p class="text-center m-0">don't have an account? <%= link_to 'sign up', new_registration_path(resource_name) %></p>
 
             </div>
           </div>
@@ -17,14 +17,14 @@
                 <form action="#!">
                   <div class="row gy-3 overflow-hidden">
                     <div class="col-12">
+                        <%= f.label :email, 'Email', class: 'form-label' %>
                       <div class="form-floating mb-3">
-                        <%= f.label :email, 'Email', class: 'form-label' %><br />
                         <%= f.email_field :email, class: 'form-control border-0 border-bottom rounded-0', id: 'email', placeholder: 'name@example.com', required: true, autofocus: true, autocomplete: 'email' %>
                       </div>
                     </div>
                     <div class="col-12">
+                        <%= f.label :password, 'Something', class: 'form-label' %>
                       <div class="form-floating mb-3">
-                        <%= f.label :password, 'Password', class: 'form-label' %><br />
                         <%= f.password_field :password, class: 'form-control border-0 border-bottom rounded-0', id: 'password', placeholder: 'Password', required: true, autocomplete: 'current-password' %>
                       </div>
                     </div>
