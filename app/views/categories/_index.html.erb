@@ -1,5 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
+<%= link_to "New category", new_category_path, class: 'btn btn-primary' %>
 <h1 class="text text-center">Категории</h1>
 <%= raw pagy_bootstrap_nav(@pagy) %>
 <% unless @categories.nil? %>
@@ -32,4 +33,3 @@
   </div>
   <%  end  %>
 <%  end %>
-<%= link_to "New category", new_category_path %>

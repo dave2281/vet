@@ -15,7 +15,7 @@
         <% if current_user.id == @question.user_id || current_user.admin? %>
           <div class="row">
             <div class="col text-md-start">
-              <%= button_to "Edit", edit_category_question_url(@question), class: 'col btn btn-success' %>
+              <%= link_to "Edit", edit_category_question_path(@question), class: 'col btn btn-success' %>
             </div>
             <div class="col text-md-end">
               <%= link_to "Destroy", category_question_path(@category, @question), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></div>

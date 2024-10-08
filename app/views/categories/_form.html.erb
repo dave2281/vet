@@ -10,8 +10,8 @@
       </ul>
     </div>
   <% end %>
-  <%= current_user.inspect %>
-  <%= form.hidden_field :user_id, value: current_user.id %>
+
+  <% form.hidden_field :user_id, value: current_user.id %>
 
   <div class="field">
     <%= form.label :title, "Title", class: 'form-label fw-bolder fs-4' %>
@@ -19,11 +19,18 @@
   </div>
 
   <div class="field">
-    <%= form.label :text, "Description", class: 'form-label fw-bolder fs-4' %>
-    <%= form.text_area :text, class: "form-control mb-2", placeholder: 'Type a response' %>
+    <%= form.label :description, "Description", class: 'form-label fw-bolder fs-4' %>
+    <%= form.text_area :description, class: "form-control mb-2", placeholder: 'Type a response' %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit 'Submit', class: 'btn btn-primary mt-2' %>
   </div>
+
+
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      h5*2
+    </div>
+  </div>  
 <% end %>
