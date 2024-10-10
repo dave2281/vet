@@ -13,10 +13,8 @@ Pet project for learning purposes.
 - **User Registration and Authentication**: Allows pet owners and veterinarians to create accounts and log in.
 - **User Profiles**: Users can create and manage profiles, including details about their pets and preferred veterinarians.
 - **Search Functionality**: Enables users to easily find information across various sections of the site.
-- **Discussion Forum**: A space for users to interact, share experiences, and ask questions about pet care.
-- **Blog and News**: A section for articles, updates, and tips related to pet health and care.
-- **Notifications and Reminders**: Automated alerts for upcoming appointments, vaccinations, and other important events.
-- **Map Integration**: Helps users locate nearby veterinarians using map services. 
+- **News**: A section for articles, updates, and tips related to pet health and care.
+- **Notifications**: Automated alerts for upcoming appointments, vaccinations, and other important events.
 
 ## Design and UX
 
