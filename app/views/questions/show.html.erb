@@ -48,6 +48,7 @@
             <div class="container-md">
               <div class="row">
                 <div class="col text-md-end">
+                  <td><%= link_to 'Edit', edit_category_question_comment_path(@category, @question, comment) %></td>
                   <td><%= link_to "Destroy", category_question_comment_url(@category, @question, comment), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>
                 </div>
               </div>
