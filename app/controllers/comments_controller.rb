@@ -13,14 +13,14 @@ class CommentsController < ApplicationController
   def create
     @comment = @question.comments.new(comment_params)
     @comment.user = current_user
-
+  
     respond_to do |format|
       if @comment.save
         format.html do
           redirect_to category_question_path(@question.category_id, @question.id),
                       notice: 'Comment was successfully created.'
         end
-        format.json { render :show, status: :created, location: @comment }
+        format.json { render json: @comment, status: :created }
       else
         format.html do
           redirect_to category_question_path(@question.category_id, @question.id), alert: 'Error creating comment.'
@@ -28,12 +28,12 @@ class CommentsController < ApplicationController
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
-  end
+  end  
 
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to category_question_comment_path, notice: 'Comment was successfully updated.' }
+        format.html { redirect_to category_question_comment_path(@question.category_id, @question.id, @comment.id), notice: 'Comment was successfully updated.' }
         format.json { render :show, status: :ok, location: @comment }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -43,20 +43,17 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
-    @category = Category.find(@question.category_id)
-    @question = Question.find(params[:question_id])
-    @comment.destroy!
-
+    @comment.destroy
+  
     respond_to do |format|
       format.html do
-        redirect_to category_question_path(@category, @question), status: :see_other,
-                                                                  notice: 'Comment was successfully destroyed.'
+        redirect_to category_question_path(@question.category_id, @question.id), status: :see_other,
+                                                                            notice: 'Comment was successfully destroyed.'
       end
       format.json { head :no_content }
     end
   end
-
+  
   private
 
   def set_question
