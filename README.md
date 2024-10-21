@@ -29,3 +29,12 @@ Pet project for learning purposes.
 
 - **Authentication**: Implement secure authentication for API access to protect sensitive user data.
 - **Data Exchange**: Provides endpoints for exchanging data between the website and other systems, such as external vet clinics or pet care services.
+
+## Tests
+
+- ~~**Unit Tests** ~~
+- ~~**Functional Tests**~~
+- **Integrational Tests**
+- **System Tests**
+- **Acceptance Tests**
+- **Routing Tests** 
