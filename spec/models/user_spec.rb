@@ -13,7 +13,7 @@ RSpec.describe User, type: :model do
         expect(user).not_to be_valid
       end
 
-      it { should_not validate_presence_of(:name) }
+      it { should validate_presence_of(:name) }
       it { should validate_presence_of(:email) }
     end
 

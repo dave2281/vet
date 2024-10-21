@@ -55,7 +55,7 @@ RSpec.describe CommentsController, type: :controller do
 
   describe 'PATCH #update' do
     let(:new_attributes) do
-      { text: 'Updated comment text' } # Убедитесь, что здесь только text
+      { text: 'Updated comment text' }
     end
 
     it 'updates the requested comment' do

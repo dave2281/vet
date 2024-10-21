@@ -22,22 +22,22 @@ class QuestionsController < ApplicationController
     @category = Category.find(params[:category_id])
     @question = @category.questions.build(question_params)
     @question.user = current_user
-
+  
     respond_to do |format|
       if @question.save
         format.html { redirect_to category_path(@category), notice: 'Question was successfully created.' }
-        format.json { render :show, status: :created, location: @question }
+        format.json { render json: @question, status: :created }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
-  end
+  end 
 
   def update
     respond_to do |format|
       if @question.update(question_params)
-        format.html { redirect_to category_question_path(@question), notice: 'Question was successfully updated.' }
+        format.html { redirect_to category_question_path(@category, @question), notice: 'Question was successfully updated.' }
         format.json { render :show, status: :ok, location: @question }
       else
         format.html { render :edit, status: :unprocessable_entity }
