@@ -9,10 +9,6 @@ RSpec.describe UsersController, type: :controller do
     create(:user, role: 'member')
   end
 
-  before do
-    sign_in user
-  end 
-
   describe 'GET #index' do
     context 'as admin' do
       before(:each) do
@@ -39,6 +35,9 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'GET #show' do
+    before(:each) do 
+      sign_in user
+    end
     it 'returns a successful response' do
       get :show, params: { id: user.id}
       expect(response).to have_http_status(:ok)
@@ -46,9 +45,12 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'GET #new' do
+    before(:each) do 
+      sign_in user
+    end
     it 'returns a successful response' do
       get :new
-    expect(response).to be_successful
+      expect(response).to be_successful
     end
   end
 
@@ -56,6 +58,10 @@ RSpec.describe UsersController, type: :controller do
     let(:new_attributes) {
       { name: 'New name', surname: 'New surname' }
     }
+
+    before(:each) do 
+      sign_in user
+    end
 
     it 'returns a success response' do
       Rails.logger.info("USER NAME:: #{new_attributes}")
@@ -77,6 +83,10 @@ RSpec.describe UsersController, type: :controller do
       {email: Faker::Internet.email, password: 'password123', role: 'member'}
     end
 
+    before(:each) do 
+      sign_in user
+    end
+
     context 'with valid params' do
       it 'creates a new user' do
         expect do
@@ -85,4 +95,17 @@ RSpec.describe UsersController, type: :controller do
       end
     end
   end
+
+  describe 'DELETE #destroy' do  
+    before do
+      sign_in admin_user
+    end
+  
+    it 'destroys the requested user' do
+      expect {
+        delete :destroy, params: { id: user.id }
+      }.to change(User, :count).by(-1)
+      expect(response).to redirect_to(users_path)
+    end
+  end  
 end
