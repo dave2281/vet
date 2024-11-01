@@ -57,6 +57,10 @@
   <% end %>
 
   <main class="content container">
+    <% if current_user.admin?%>
+      <%= link_to "Admin controll panel", admin_home_path, class: 'btn btn-primary'%>
+    <% end %>
+    
     <%= yield %>
     <button id="scrollToTop" class="btn btn-primary">
       <i class="bi bi-arrow-up"></i>

@@ -7,8 +7,10 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    get '/', to: 'pages#index', as: :home 
+    get 'dashboard/index'
     resources :dashboard, only: [:index]
-  end
+  end  
 
   resources :users
 

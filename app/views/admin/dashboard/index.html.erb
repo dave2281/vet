@@ -1,0 +1,7 @@
+<h1>Admin::Dashboard#index</h1>
+<p>Find me in app/views/admin/dashboard/index.html.erb</p>
+
+<% @users.each do |user| %>
+  <p><%= "#{user.name}"%></p>
+    <p><%= link_to "#{user.name}", user %></p>
+<% end %>
